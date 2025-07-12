@@ -1,78 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>QR Code Generator</title>
   <style>
     body {
-      background: linear-gradient(to bottom right, #e0d4f7, #e6e6fa);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #e0c3fc, #8ec5fc);
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
       margin: 0;
     }
+
     .container {
-      background-color: white;
+      background: white;
       padding: 40px;
-      border-radius: 16px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      text-align: center;
       width: 90%;
       max-width: 500px;
-      text-align: center;
     }
-    h1 {
-      color: #5a3ea1;
+
+    h2 {
+      color: #5e2b97;
       margin-bottom: 20px;
     }
-    input[type="text"] {
+
+    input {
       width: 100%;
-      padding: 12px;
-      margin: 20px 0;
-      border-radius: 8px;
-      border: 1px solid #ccc;
+      padding: 10px;
       font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 20px;
     }
+
     button {
-      background-color: #5a3ea1;
+      background-color: #6a0dad;
       color: white;
       padding: 12px 24px;
       border: none;
-      border-radius: 8px;
-      font-size: 16px;
+      border-radius: 10px;
       cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
     }
+
     button:hover {
-      background-color: #4b3290;
+      background-color: #5701a6;
     }
+
     #qrCode {
       margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 280px;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>QR Code Generator</h1>
-    <input type="text" id="text" placeholder="Enter text or URL">
+    <h2>QR Code Generator</h2>
+    <input type="text" id="text" placeholder="Enter text or URL" />
+    <br />
     <button onclick="generateQRCode()">Generate QR Code</button>
     <div id="qrCode"></div>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
   <script>
     function generateQRCode() {
-      var text = document.getElementById("text").value;
-      if (!text.trim()) {
-        alert("Please enter some text or URL");
+      const text = document.getElementById("text").value;
+      if (text.trim() === "") {
+        alert("Please enter text or URL.");
         return;
       }
-      var qr = new QRious({
+
+      const qr = new QRious({
         element: document.createElement('canvas'),
         value: text,
-        size: 250
+        size: 250 // 👈 Bigger size here
       });
-      var qrDiv = document.getElementById("qrCode");
+
+      const qrDiv = document.getElementById("qrCode");
       qrDiv.innerHTML = "";
-      qrDiv.appendChild(qr.ele
+      qrDiv.appendChild(qr.element);
+    }
+  </script>
+</body>
+</html>
